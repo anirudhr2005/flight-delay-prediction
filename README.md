@@ -19,7 +19,22 @@ This installs the `flight_delay` package from `src/` in editable mode, so the
 scripts can import it. The raw Kaggle files are read from `FLIGHT_DATA_DIR`
 (default in VS Code and `run_pipeline.sh`: `~/Desktop/archive`).
 
-## Run
+## Notebook
+
+[`notebooks/Flight_Delay_Prediction.ipynb`](notebooks/Flight_Delay_Prediction.ipynb)
+is the full project in one self-contained notebook — inspection, cleaning,
+feature engineering, EDA, all five models, threshold tuning, evaluation and
+conclusions — saved with its outputs so it can be read on GitHub without
+running it. To run it yourself, register the project kernel once:
+
+```bash
+.venv/bin/python -m ipykernel install --sys-prefix --name flight-delay --display-name "Python (flight-delay)"
+```
+
+then open the notebook in VS Code or Jupyter, pick **Python (flight-delay)**
+and Run All (~15 min, mostly the SVM).
+
+## Run the scripts
 
 Whole pipeline (~20 min, mostly the SVM):
 
@@ -47,6 +62,7 @@ Tests (leakage guard, shared split, every model trains):
 
 | Path | What it is |
 |---|---|
+| `notebooks/Flight_Delay_Prediction.ipynb` | The whole project as one executed notebook |
 | `src/flight_delay/config.py` | Paths, seed, feature list, leakage column list |
 | `src/flight_delay/data.py` | Loading the sample, the shared train/test split, SVM subset |
 | `src/flight_delay/models.py` | The five model pipelines |
