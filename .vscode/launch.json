@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run current script (2022)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "args": [
+        "--year",
+        "2022"
+      ],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "FLIGHT_DATA_DIR": "${env:HOME}/Desktop/archive"
+      },
+      "console": "integratedTerminal"
+    }
+  ]
+}

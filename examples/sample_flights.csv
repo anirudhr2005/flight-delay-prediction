@@ -1,0 +1,9 @@
+Airline,Origin,Dest,CRSElapsedTime,Distance,Month,DayofMonth,DayOfWeek,dep_hour,arr_hour,is_weekend,overnight,origin_daily_flights,dest_daily_flights,origin_hourly_flights,aircraft_leg_of_day,days_to_holiday,ArrDel15
+Southwest Airlines Co.,SDF,TPA,125.0,727.0,2,14,1,5,7,0,0,70,217,4,1,7,0
+Southwest Airlines Co.,SJC,LAS,85.0,386.0,1,30,7,6,7,1,0,121,447,6,1,13,0
+Hawaiian Airlines Inc.,KOA,HNL,48.0,163.0,6,28,2,11,11,0,0,49,151,4,5,6,0
+Delta Air Lines Inc.,SLC,LAX,116.0,590.0,6,20,1,11,12,0,0,326,560,43,2,0,1
+Delta Air Lines Inc.,SEA,HNL,365.0,2677.0,3,24,4,15,18,0,0,473,156,36,1,30,0
+Endeavor Air Inc.,ATL,TRI,65.0,227.0,5,13,5,15,16,0,0,926,12,68,2,17,1
+SkyWest Airlines Inc.,DEN,PSC,160.0,852.0,7,8,5,18,20,0,0,813,18,28,6,4,1
+Comair Inc.,DCA,TLH,133.0,716.0,3,24,4,20,22,0,0,424,15,23,6,30,1

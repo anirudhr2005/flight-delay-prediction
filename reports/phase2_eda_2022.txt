@@ -1,0 +1,84 @@
+Correlation with ArrDel15 (numeric features):
+  dep_hour                  +0.161
+  arr_hour                  +0.129
+  aircraft_leg_of_day       +0.114
+  DayOfWeek                 +0.041
+  Month                     +0.034
+  overnight                 +0.034
+  dest_daily_flights        -0.032
+  Quarter                   +0.029
+  DistanceGroup             +0.028
+  Distance                  +0.027
+  is_weekend                +0.024
+  CRSElapsedTime            +0.022
+  origin_daily_flights      +0.022
+  DayofMonth                -0.020
+  origin_hourly_flights     +0.007
+  days_to_holiday           +0.006
+
+Delay rate by departure hour:
+dep_hour
+0     21.0%
+5      8.7%
+6     10.9%
+7     12.6%
+8     14.7%
+9     16.0%
+10    17.6%
+11    18.8%
+12    19.5%
+13    22.3%
+14    23.3%
+15    26.8%
+16    27.0%
+17    28.4%
+18    29.1%
+19    30.3%
+20    31.0%
+21    31.3%
+22    30.1%
+23    24.0%
+
+Delay rate by month:
+Month
+1    19.4%
+2    19.7%
+3    21.3%
+4    22.3%
+5    21.1%
+6    24.1%
+7    23.2%
+
+Delay rate by airline:
+Airline
+Capital Cargo International                  15.3%
+Horizon Air                                  16.1%
+Air Wisconsin Airlines Corp                  16.5%
+Envoy Air                                    16.6%
+Hawaiian Airlines Inc.                       16.7%
+Endeavor Air Inc.                            17.1%
+Delta Air Lines Inc.                         17.5%
+SkyWest Airlines Inc.                        17.5%
+Mesa Airlines Inc.                           19.6%
+Alaska Airlines Inc.                         19.9%
+United Air Lines Inc.                        20.6%
+Commutair Aka Champlain Enterprises, Inc.    20.9%
+Comair Inc.                                  20.9%
+Republic Airlines                            22.0%
+American Airlines Inc.                       22.7%
+Southwest Airlines Co.                       24.5%
+GoJet Airlines, LLC d/b/a United Express     26.5%
+Spirit Air Lines                             26.9%
+Frontier Airlines Inc.                       31.6%
+JetBlue Airways                              33.8%
+Allegiant Air                                36.2%
+
+Delay rate by aircraft leg:
+aircraft_leg_of_day
+1    15.2%
+2    19.6%
+3    22.7%
+4    26.3%
+5    27.5%
+6    29.1%
+7    30.6%

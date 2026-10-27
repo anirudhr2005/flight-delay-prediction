@@ -1,0 +1,8 @@
+Loaded 4,078,318 rows from Combined_Flights_2022.parquet
+After dropping cancelled/diverted: 3,944,916
+After dropping missing target/duplicates: 3,944,915
+Full clean delayed rate: 21.65%
+Sample: 200,000 rows, delayed rate 21.65%
+Features (17): Airline, Origin, Dest, CRSElapsedTime, Distance, Month, DayofMonth, DayOfWeek, dep_hour, arr_hour, is_weekend, overnight, origin_daily_flights, dest_daily_flights, origin_hourly_flights, aircraft_leg_of_day, days_to_holiday
+Missing values in sample: 0
+Saved to data/processed/flights_2022_sample.parquet

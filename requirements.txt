@@ -1,0 +1,2 @@
+# Installs the flight_delay package (src/) in editable mode plus dev tools.
+-e .[dev]

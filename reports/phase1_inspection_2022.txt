@@ -1,0 +1,110 @@
+File: Combined_Flights_2022.parquet (149.6 MB on disk)
+Rows: 4,078,318   Columns: 61
+In-memory size: 2.41 GB
+Date range: 2022-01-01 to 2022-07-31
+
+Columns and dtypes:
+  FlightDate                                    datetime64[us]
+  Airline                                       str
+  Origin                                        str
+  Dest                                          str
+  Cancelled                                     bool
+  Diverted                                      bool
+  CRSDepTime                                    int64
+  DepTime                                       float64
+  DepDelayMinutes                               float64
+  DepDelay                                      float64
+  ArrTime                                       float64
+  ArrDelayMinutes                               float64
+  AirTime                                       float64
+  CRSElapsedTime                                float64
+  ActualElapsedTime                             float64
+  Distance                                      float64
+  Year                                          int64
+  Quarter                                       int64
+  Month                                         int64
+  DayofMonth                                    int64
+  DayOfWeek                                     int64
+  Marketing_Airline_Network                     str
+  Operated_or_Branded_Code_Share_Partners       str
+  DOT_ID_Marketing_Airline                      int64
+  IATA_Code_Marketing_Airline                   str
+  Flight_Number_Marketing_Airline               int64
+  Operating_Airline                             str
+  DOT_ID_Operating_Airline                      int64
+  IATA_Code_Operating_Airline                   str
+  Tail_Number                                   str
+  Flight_Number_Operating_Airline               int64
+  OriginAirportID                               int64
+  OriginAirportSeqID                            int64
+  OriginCityMarketID                            int64
+  OriginCityName                                str
+  OriginState                                   str
+  OriginStateFips                               int64
+  OriginStateName                               str
+  OriginWac                                     int64
+  DestAirportID                                 int64
+  DestAirportSeqID                              int64
+  DestCityMarketID                              int64
+  DestCityName                                  str
+  DestState                                     str
+  DestStateFips                                 int64
+  DestStateName                                 str
+  DestWac                                       int64
+  DepDel15                                      float64
+  DepartureDelayGroups                          float64
+  DepTimeBlk                                    str
+  TaxiOut                                       float64
+  WheelsOff                                     float64
+  WheelsOn                                      float64
+  TaxiIn                                        float64
+  CRSArrTime                                    int64
+  ArrDelay                                      float64
+  ArrDel15                                      float64
+  ArrivalDelayGroups                            float64
+  ArrTimeBlk                                    str
+  DistanceGroup                                 int64
+  DivAirportLandings                            int64
+
+Missing values (columns with any):
+  ArrivalDelayGroups                               133,402  (3.27%)
+  ArrDel15                                         133,402  (3.27%)
+  ArrDelayMinutes                                  133,402  (3.27%)
+  AirTime                                          133,402  (3.27%)
+  ActualElapsedTime                                133,402  (3.27%)
+  ArrDelay                                         133,402  (3.27%)
+  TaxiIn                                           124,242  (3.05%)
+  WheelsOn                                         124,242  (3.05%)
+  ArrTime                                          124,239  (3.05%)
+  WheelsOff                                        122,666  (3.01%)
+  TaxiOut                                          122,666  (3.01%)
+  DepDel15                                         120,495  (2.95%)
+  DepartureDelayGroups                             120,495  (2.95%)
+  DepDelayMinutes                                  120,495  (2.95%)
+  DepDelay                                         120,495  (2.95%)
+  DepTime                                          120,433  (2.95%)
+  Tail_Number                                       26,795  (0.66%)
+
+Duplicate rows: 0
+
+Cancelled: 123,192   Diverted: 10,210
+
+Target ArrDel15 distribution (all rows, incl. NaN for cancelled/diverted):
+  0.0     3,090,954  (75.79%)
+  1.0       853,962  (20.94%)
+  nan       133,402  (3.27%)
+
+Among completed flights: delayed rate = 21.65%, imbalance ratio on-time:delayed = 3.6:1
+
+Top airlines by flights:
+Airline
+Southwest Airlines Co.    731925
+Delta Air Lines Inc.      512114
+American Airlines Inc.    495953
+SkyWest Airlines Inc.     440807
+United Air Lines Inc.     352009
+Republic Airlines         197881
+JetBlue Airways           156793
+Envoy Air                 150758
+Endeavor Air Inc.         142624
+Comair Inc.               135884
