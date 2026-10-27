@@ -22,9 +22,10 @@ parser = year_parser(__doc__)
 parser.add_argument("--sample-size", type=int, default=SAMPLE_SIZE)
 args = parser.parse_args()
 
-# Kept in the sample only so the EDA heatmap can show why they were dropped
-# as model features (near-duplicates of Distance and Month).
-EDA_ONLY = ["DistanceGroup", "Quarter"]
+# Kept in the sample but not used as model features: FlightDate drives the
+# chronological split; the others are for EDA (see config.py for why they
+# are excluded).
+EXTRA = ["FlightDate", "Month", "DistanceGroup", "Quarter"]
 
 # Columns known before departure, plus what is needed to clean and build features.
 COLUMNS = [
@@ -68,7 +69,7 @@ def add_features(df: pd.DataFrame, year: str) -> pd.DataFrame:
     df["days_to_holiday"] = df["FlightDate"].map(dict(zip(dates, gap))).clip(upper=30)
 
     df[TARGET] = df[TARGET].astype(int)
-    return df[FEATURES + EDA_ONLY + [TARGET]]
+    return df[FEATURES + EXTRA + [TARGET]]
 
 
 def stratified_sample(df: pd.DataFrame, n: int) -> pd.DataFrame:

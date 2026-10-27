@@ -1,6 +1,9 @@
 {
-  "train_rows": 160000,
-  "test_rows": 40000,
+  "split": "chronological",
+  "train_rows": 139780,
+  "test_rows": 60220,
+  "train_delay_rate": 0.2078981256259837,
+  "test_delay_rate": 0.23636665559614745,
   "svm_train_rows": 25000,
   "cv_folds": 5,
   "features": [
@@ -9,7 +12,6 @@
     "Dest",
     "CRSElapsedTime",
     "Distance",
-    "Month",
     "DayofMonth",
     "DayOfWeek",
     "dep_hour",

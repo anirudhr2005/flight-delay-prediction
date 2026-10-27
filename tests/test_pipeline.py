@@ -1,13 +1,18 @@
 """Fast checks that guard the parts of the pipeline that are easy to break
-silently: leakage, the shared split, and that every model trains and
-outputs valid probabilities."""
+silently: leakage, the train/test splits, threshold objectives, and that
+every model trains and outputs valid probabilities."""
 import numpy as np
 import pandas as pd
 import pytest
 
+from sklearn.metrics import f1_score, recall_score
+
 from flight_delay.config import CATEGORICAL, FEATURES, LEAKAGE_COLUMNS, NUMERIC, TARGET
-from flight_delay.data import training_rows
+from flight_delay.data import chronological_cutoff, split_frame, training_rows
 from flight_delay.models import MODEL_FILES, build_models
+from flight_delay.thresholds import (
+    PRECISION_TARGET, RECALL_TARGET, choose_threshold, threshold_curves,
+)
 
 
 def make_flights(n=600, seed=0):
@@ -63,3 +68,47 @@ def test_svm_subset_is_stratified(monkeypatch):
     assert abs(y.mean() - df[TARGET].mean()) < 0.01
     X_all, _ = training_rows("Random Forest", df[FEATURES], df[TARGET])
     assert len(X_all) == 1000
+
+
+def test_month_is_not_a_feature():
+    # Test months never appear in training under the chronological split.
+    assert "Month" not in FEATURES and "Quarter" not in FEATURES
+
+
+def test_chronological_split_tests_on_later_dates():
+    df = make_flights(700)
+    df["FlightDate"] = pd.date_range("2022-01-01", periods=len(df), freq="7h")
+    X_train, X_test, y_train, y_test = split_frame(df, "chronological")
+    train_dates = df.loc[X_train.index, "FlightDate"]
+    test_dates = df.loc[X_test.index, "FlightDate"]
+    assert train_dates.max() < test_dates.min()
+    assert len(X_train) + len(X_test) == len(df)
+    # The test set is the last two calendar months present.
+    cutoff = chronological_cutoff(df["FlightDate"])
+    assert train_dates.max() < cutoff <= test_dates.min()
+    assert test_dates.dt.to_period("M").nunique() == 2
+
+
+def test_random_split_is_stratified():
+    df = make_flights(1000)
+    df["FlightDate"] = pd.Timestamp("2022-01-01")
+    _, X_test, y_train, y_test = split_frame(df, "random")
+    assert len(X_test) == 200
+    assert abs(y_train.mean() - y_test.mean()) < 0.01
+
+
+def test_threshold_objectives():
+    rng = np.random.default_rng(1)
+    y = rng.integers(0, 2, 2000)
+    proba = np.clip(0.3 * y + rng.random(2000) * 0.7, 0, 1)
+    curves = threshold_curves(y, proba)
+    assert choose_threshold(curves, "default_0.5") == 0.5
+    t_recall = choose_threshold(curves, f"recall_{RECALL_TARGET:.0%}")
+    assert recall_score(y, proba >= t_recall) >= RECALL_TARGET
+    t_macro = choose_threshold(curves, "max_macro_f1")
+    assert f1_score(y, proba >= t_macro, average="macro") == pytest.approx(curves["f1_macro"].max())
+    # An unreachable target returns None instead of a misleading threshold:
+    # with ~20% positives and an uninformative model, precision stays ~0.2.
+    y_rare = (rng.random(2000) < 0.2).astype(int)
+    assert choose_threshold(threshold_curves(y_rare, np.full(2000, 0.5)),
+                            f"precision_{PRECISION_TARGET:.0%}") is None

@@ -1,0 +1,24 @@
+random split: train 160,000 flights (21.65% delayed), test 40,000 flights (21.65% delayed)
+
+Logistic Regression: cross-validating on 160,000 rows ...
+  CV macro F1 0.558 ± 0.003, delayed F1 0.405, ROC-AUC 0.650  (5s CV, 1s final fit)
+
+Decision Tree: cross-validating on 160,000 rows ...
+  CV macro F1 0.557 ± 0.002, delayed F1 0.393, ROC-AUC 0.636  (4s CV, 1s final fit)
+
+Random Forest: cross-validating on 160,000 rows ...
+  CV macro F1 0.609 ± 0.001, delayed F1 0.369, ROC-AUC 0.680  (61s CV, 17s final fit)
+
+SVM (RBF): cross-validating on 25,000 rows ...
+  CV macro F1 0.443 ± 0.001, delayed F1 0.007, ROC-AUC 0.652  (372s CV, 115s final fit)
+
+Naive Bayes: cross-validating on 160,000 rows ...
+  CV macro F1 0.548 ± 0.005, delayed F1 0.246, ROC-AUC 0.634  (1s CV, 0s final fit)
+
+5-fold cross-validation (random split, training set, mean):
+              Model  Train rows  Accuracy  Precision (delayed)  Recall (delayed)  F1 (delayed)  Macro F1  ROC-AUC
+      Random Forest      160000     0.756                0.418             0.331         0.369     0.609    0.680
+Logistic Regression      160000     0.611                0.303             0.612         0.405     0.558    0.650
+      Decision Tree      160000     0.618                0.300             0.570         0.393     0.557    0.636
+        Naive Bayes      160000     0.751                0.358             0.187         0.246     0.548    0.634
+          SVM (RBF)       25000     0.784                0.523             0.003         0.007     0.443    0.652

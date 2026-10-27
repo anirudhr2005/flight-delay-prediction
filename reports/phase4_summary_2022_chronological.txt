@@ -1,0 +1,134 @@
+chronological split: train 139,780 flights (20.79% delayed), test 60,220 flights (23.64% delayed)
+  train dates 2022-01-01 to 2022-05-31, test dates 2022-06-01 to 2022-07-31
+
+Primary objective (Balanced: maximise macro F1 (primary metric)):
+                     threshold  accuracy  balanced_accuracy  precision_delayed  recall_delayed  f1_delayed  f1_macro  roc_auc  pr_auc  f1_macro_ci_low  f1_macro_ci_high
+model                                                                                                                                                                   
+Logistic Regression      0.580     0.713              0.582              0.379           0.333       0.355     0.585    0.643   0.351            0.581             0.589
+Random Forest            0.460     0.717              0.578              0.381           0.315       0.345     0.582    0.636   0.348            0.578             0.586
+Naive Bayes              0.290     0.685              0.576              0.345           0.369       0.356     0.574    0.637   0.327            0.570             0.578
+SVM (RBF)                0.280     0.704              0.564              0.352           0.299       0.323     0.567    0.617   0.322            0.563             0.571
+Decision Tree            0.640     0.690              0.551              0.324           0.286       0.304     0.552    0.585   0.297            0.548             0.557
+
+default_0.5: Fixed 0.5 cut-off (no tuning)
+                     threshold  precision_delayed  recall_delayed  f1_delayed  f1_macro  alert_rate
+model                                                                                              
+Logistic Regression      0.500              0.332           0.555       0.415     0.573       0.396
+Random Forest            0.500              0.408           0.225       0.290     0.565       0.130
+Naive Bayes              0.500              0.364           0.179       0.240     0.539       0.116
+SVM (RBF)                0.500              0.444           0.004       0.008     0.437       0.002
+Decision Tree            0.500              0.290           0.537       0.376     0.530       0.438
+
+max_delayed_f1: Maximise F1 of the delayed class
+                     threshold  precision_delayed  recall_delayed  f1_delayed  f1_macro  alert_rate
+model                                                                                              
+Logistic Regression      0.500              0.332           0.555       0.415     0.573       0.396
+Random Forest            0.380              0.323           0.539       0.404     0.564       0.395
+Naive Bayes              0.140              0.312           0.665       0.424     0.543       0.504
+SVM (RBF)                0.180              0.295           0.645       0.404     0.522       0.518
+Decision Tree            0.490              0.287           0.554       0.378     0.525       0.455
+
+recall_70%: Catch delays: highest precision with recall >= 70% (e.g. alert passengers / plan spare crew)
+                     threshold  precision_delayed  recall_delayed  f1_delayed  f1_macro  alert_rate
+model                                                                                              
+Logistic Regression      0.450              0.306           0.686       0.424     0.533       0.529
+Random Forest            0.340              0.302           0.667       0.416     0.529       0.523
+Naive Bayes              0.120              0.303           0.720       0.426     0.523       0.562
+SVM (RBF)                0.180              0.295           0.645       0.404     0.522       0.518
+Decision Tree            0.420              0.276           0.638       0.386     0.495       0.546
+
+precision_50%: Few false alarms: highest recall with precision >= 50% (e.g. costly interventions)
+                      threshold  precision_delayed  recall_delayed  f1_delayed    f1_macro  alert_rate
+model                                                                                                 
+Logistic Regression       0.760              0.488           0.029       0.055       0.460       0.014
+Random Forest             0.560              0.442           0.127       0.198       0.527       0.068
+Naive Bayes         unreachable        unreachable     unreachable unreachable unreachable unreachable
+SVM (RBF)                 0.440              0.425           0.022       0.042       0.453       0.012
+Decision Tree             0.810              0.333           0.083       0.133       0.491       0.059
+
+Reference only - threshold maximising macro F1 on the test set itself (oracle):
+                     threshold  precision_delayed  recall_delayed  f1_delayed  f1_macro  alert_rate
+model                                                                                              
+Logistic Regression      0.550              0.359           0.413       0.384     0.587       0.272
+Random Forest            0.440              0.368           0.368       0.368     0.586       0.236
+Naive Bayes              0.240              0.337           0.450       0.385     0.575       0.315
+SVM (RBF)                0.260              0.342           0.359       0.350     0.571       0.248
+Decision Tree            0.580              0.317           0.389       0.349     0.558       0.290
+
+Permutation importance (ROC-AUC drop), Logistic Regression:
+Distance                 0.1178
+Origin                   0.0995
+dep_hour                 0.0824
+CRSElapsedTime           0.0772
+Dest                     0.0601
+dest_daily_flights       0.0559
+origin_daily_flights     0.0428
+Airline                  0.0115
+DayOfWeek                0.0110
+is_weekend               0.0088
+arr_hour                 0.0024
+aircraft_leg_of_day      0.0017
+origin_hourly_flights    0.0014
+days_to_holiday          0.0010
+overnight               -0.0003
+DayofMonth              -0.0025
+
+=== Logistic Regression (max_macro_f1, threshold 0.58) ===
+              precision    recall  f1-score   support
+
+     On time      0.801     0.831     0.816     45986
+     Delayed      0.379     0.333     0.355     14234
+
+    accuracy                          0.713     60220
+   macro avg      0.590     0.582     0.585     60220
+weighted avg      0.701     0.713     0.707     60220
+
+Macro F1 95% bootstrap CI: [0.581, 0.589]
+
+=== Decision Tree (max_macro_f1, threshold 0.64) ===
+              precision    recall  f1-score   support
+
+     On time      0.787     0.815     0.801     45986
+     Delayed      0.324     0.286     0.304     14234
+
+    accuracy                          0.690     60220
+   macro avg      0.555     0.551     0.552     60220
+weighted avg      0.677     0.690     0.683     60220
+
+Macro F1 95% bootstrap CI: [0.548, 0.557]
+
+=== Random Forest (max_macro_f1, threshold 0.46) ===
+              precision    recall  f1-score   support
+
+     On time      0.799     0.842     0.820     45986
+     Delayed      0.381     0.315     0.345     14234
+
+    accuracy                          0.717     60220
+   macro avg      0.590     0.578     0.582     60220
+weighted avg      0.700     0.717     0.707     60220
+
+Macro F1 95% bootstrap CI: [0.578, 0.586]
+
+=== SVM (RBF) (max_macro_f1, threshold 0.28) ===
+              precision    recall  f1-score   support
+
+     On time      0.793     0.830     0.811     45986
+     Delayed      0.352     0.299     0.323     14234
+
+    accuracy                          0.704     60220
+   macro avg      0.572     0.564     0.567     60220
+weighted avg      0.689     0.704     0.696     60220
+
+Macro F1 95% bootstrap CI: [0.563, 0.571]
+
+=== Naive Bayes (max_macro_f1, threshold 0.29) ===
+              precision    recall  f1-score   support
+
+     On time      0.800     0.783     0.792     45986
+     Delayed      0.345     0.369     0.356     14234
+
+    accuracy                          0.685     60220
+   macro avg      0.573     0.576     0.574     60220
+weighted avg      0.693     0.685     0.689     60220
+
+Macro F1 95% bootstrap CI: [0.570, 0.578]

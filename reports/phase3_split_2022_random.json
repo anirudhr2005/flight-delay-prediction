@@ -1,0 +1,28 @@
+{
+  "split": "random",
+  "train_rows": 160000,
+  "test_rows": 40000,
+  "train_delay_rate": 0.21646875,
+  "test_delay_rate": 0.216475,
+  "svm_train_rows": 25000,
+  "cv_folds": 5,
+  "features": [
+    "Airline",
+    "Origin",
+    "Dest",
+    "CRSElapsedTime",
+    "Distance",
+    "DayofMonth",
+    "DayOfWeek",
+    "dep_hour",
+    "arr_hour",
+    "is_weekend",
+    "overnight",
+    "origin_daily_flights",
+    "dest_daily_flights",
+    "origin_hourly_flights",
+    "aircraft_leg_of_day",
+    "days_to_holiday"
+  ],
+  "seed": 42
+}

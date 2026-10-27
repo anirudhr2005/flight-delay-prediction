@@ -1,0 +1,25 @@
+chronological split: train 139,780 flights (20.79% delayed), test 60,220 flights (23.64% delayed)
+  train dates 2022-01-01 to 2022-05-31, test dates 2022-06-01 to 2022-07-31
+
+Logistic Regression: cross-validating on 139,780 rows ...
+  CV macro F1 0.556 ± 0.001, delayed F1 0.395, ROC-AUC 0.650  (5s CV, 1s final fit)
+
+Decision Tree: cross-validating on 139,780 rows ...
+  CV macro F1 0.561 ± 0.004, delayed F1 0.389, ROC-AUC 0.647  (4s CV, 1s final fit)
+
+Random Forest: cross-validating on 139,780 rows ...
+  CV macro F1 0.617 ± 0.002, delayed F1 0.369, ROC-AUC 0.695  (51s CV, 13s final fit)
+
+SVM (RBF): cross-validating on 25,000 rows ...
+  CV macro F1 0.449 ± 0.003, delayed F1 0.014, ROC-AUC 0.657  (375s CV, 114s final fit)
+
+Naive Bayes: cross-validating on 139,780 rows ...
+  CV macro F1 0.549 ± 0.004, delayed F1 0.241, ROC-AUC 0.630  (1s CV, 0s final fit)
+
+5-fold cross-validation (chronological split, training set, mean):
+              Model  Train rows  Accuracy  Precision (delayed)  Recall (delayed)  F1 (delayed)  Macro F1  ROC-AUC
+      Random Forest      139780     0.776                0.445             0.316         0.369     0.617    0.695
+      Decision Tree      139780     0.628                0.295             0.570         0.389     0.561    0.647
+Logistic Regression      139780     0.615                0.293             0.604         0.395     0.556    0.650
+        Naive Bayes      139780     0.760                0.352             0.184         0.241     0.549    0.630
+          SVM (RBF)       25000     0.792                0.515             0.007         0.014     0.449    0.657
