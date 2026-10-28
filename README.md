@@ -12,16 +12,37 @@ precision, recall, ROC-AUC and PR-AUC.
 tested on June–July 2022, i.e. on future flights. A random 80/20 split is
 also run for comparison.
 
-## Setup
+## Quick start (no download needed)
+
+The repo includes the processed 200,000-flight sample
+(`data/processed/flights_2022_sample.parquet`, 3 MB), so you can train and
+evaluate every model straight after cloning:
 
 ```bash
+git clone https://github.com/anirudhr2005/flight-delay-prediction.git
+cd flight-delay-prediction
 python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
+source .venv/bin/activate
+pip install -r requirements.txt
+
+python scripts/04_train_models.py      # 5 models, 5-fold CV (~10 min, mostly SVM)
+python scripts/05_evaluate.py          # test-set metrics and charts
+python scripts/06_predict.py examples/sample_flights.csv --model "Logistic Regression"
 ```
 
-This installs the `flight_delay` package from `src/` in editable mode, so the
-scripts can import it. The raw Kaggle files are read from `FLIGHT_DATA_DIR`
-(default in VS Code and `run_pipeline.sh`: `~/Desktop/archive`).
+Add `--split random` to scripts 04 and 05 (then run `scripts/07_compare_splits.py`)
+for the random-split comparison, and `python scripts/03_eda.py` for the EDA charts.
+
+## Full pipeline from the raw data
+
+Steps 01–02 and Phases 1–2 of the notebook need the raw Kaggle file
+(`Combined_Flights_2022.parquet`, ~150 MB, too large for GitHub). See
+[`data/README.md`](data/README.md) for how to download it; put it in `data/raw/`
+or point `FLIGHT_DATA_DIR` at its folder (VS Code and `run_pipeline.sh`
+default to `~/Desktop/archive`).
+
+`pip install -r requirements.txt` installs the `flight_delay` package from
+`src/` in editable mode, so the scripts can import it.
 
 ## Notebook
 
@@ -40,7 +61,7 @@ and Run All (~15 min, mostly the SVM).
 
 ## Run the scripts
 
-Whole pipeline, both splits plus the comparison (~40 min, mostly the SVM):
+Whole pipeline from the raw data, both splits plus the comparison (~40 min, mostly the SVM):
 
 ```bash
 scripts/run_pipeline.sh 2022
@@ -169,9 +190,11 @@ from 15% on an aircraft's first leg to 31% by its seventh, and ranges from
 
 ## Data and models in this repo
 
-`data/` and `models/` are not committed (the raw data is from Kaggle and the
-Random Forest is ~130 MB). `scripts/run_pipeline.sh` rebuilds both; reports
-and figures are committed.
+The processed sample is committed (see `data/README.md`); the raw Kaggle files
+(~150 MB per year) and trained models (the Random Forest is ~130 MB) are not.
+`scripts/04_train_models.py` rebuilds the models from the sample, and
+`scripts/run_pipeline.sh` rebuilds everything from the raw data. Reports and
+figures are committed.
 
 ## Limitations
 
